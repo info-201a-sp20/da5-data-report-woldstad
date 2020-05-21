@@ -1,5 +1,5 @@
 ---
-title: "Assignment 5 - Data Report"
+title: "Assignment 5 - Data Report: U.S. Shootings in 2018"
 output: html_document
 ---
 
@@ -7,22 +7,21 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Summary Information
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+```{r, include = FALSE}
+source("analysis.R")
+```
+  This report analyzes a dataset containing information about _U.S. shootings in 2018_ ([source](http://www.shootingtracker.com/)). According to the dataset, there were **`r number_of_shootings` shootings**, with  **`r number_lost` people killed in the United States**. When analyzing the data by location, **the U.S. city that was most impacted was `r most_impacted_city`**, with impact being quantified by the number of casualties. **In `r most_impacted_city`, `r most_impact_city_numbers` people were either killed or injured.** When analyzing the data by U.S. states, **`r num_states_with_shootings` states had shootings in 2018**, and **`r get_correct_grammar(state_most_shootings)` had the most shootings**. **The state with the most casualties was `r state_most_casualties` with `r number_casualties` casualties.**
+  
+## Summary Table
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r, echo = FALSE}
+kable(agg_table,
+      col.names = c("State", "Number of Shootings",
+                    "Injured", "Killed", "Total Casualties", "% of Casualties Killed")) %>%
+  kable_styling(bootstrap_options = "striped", fixed_thead = T) %>% 
+  scroll_box(width = "100%", height = "400px")
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+In the table above, the data is sorted by U.S. State and contains the _number of shootings in each state_, _number of people injured_, _number of people killed_, _the total number of casualties in 2018_, and _the percentage of people who died when compared to the total number of casualties_. The table is arranged by total number of shootings, so the state with the most shootings appears at the top. It should be noted that **not all states are listed within the table, but only the `r num_states_with_shootings` states with recorded shootings in 2018**. The table depicts `r get_correct_grammar(state_most_shootings)` to have the most shootings; additionally, _states with a higher number of shootings have more overall casualties_. `r state_most_casualties` has the highest recorded number of casualties and is also the state with the most shootings. On the other hand, _when looking that the percentage of casualties that were killed, the data stays more consistent across all states_, with the average being `r avg_percent`; however, there are outliers to this average. An extreme value within the dataset is the percent of casualties killed in `r max_state`, in which `r max_percent` of the casualties had died.
