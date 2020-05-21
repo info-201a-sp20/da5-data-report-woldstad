@@ -20,8 +20,29 @@ source("analysis.R")
 kable(agg_table,
       col.names = c("State", "Number of Shootings",
                     "Injured", "Killed", "Total Casualties", "% of Casualties Killed")) %>%
-  kable_styling(bootstrap_options = "striped", fixed_thead = T) %>% 
+  kable_styling(bootstrap_options = "striped", fixed_thead = T) %>%
   scroll_box(width = "100%", height = "400px")
 ```
 
+<br>
 In the table above, the data is sorted by U.S. State and contains the _number of shootings in each state_, _number of people injured_, _number of people killed_, _the total number of casualties in 2018_, and _the percentage of people who died when compared to the total number of casualties_. The table is arranged by total number of shootings, so the state with the most shootings appears at the top. It should be noted that **not all states are listed within the table, but only the `r num_states_with_shootings` states with recorded shootings in 2018**. The table depicts `r get_correct_grammar(state_most_shootings)` to have the most shootings; additionally, _states with a higher number of shootings have more overall casualties_. `r state_most_casualties` has the highest recorded number of casualties and is also the state with the most shootings. On the other hand, _when looking that the percentage of casualties that were killed, the data stays more consistent across all states_, with the average being `r avg_percent`; however, there are outliers to this average. An extreme value within the dataset is the percent of casualties killed in `r max_state`, in which `r max_percent` of the casualties had died.
+
+## Particular Incident: Delaware - July 9th, 2018
+A particular incident of this dataset is a shooting that occured on _`r date_case`_ in _`r case_city`, `r case_state`_, resulting in `r num_killed_case` people killed and `r num_injured_case` survivors. This particular case involved a murder-suicide, where a husband of a family had shot his family and then himself. Their neighbor had claimed that the couple had outspoken marital issues ([source](https://www.nbcphiladelphia.com/news/national-international/shooting-wilmington-delaware-home/2065392/)). This incident is the only recorded shooting in Delaware in 2018.
+
+## Interactive Visualization - Shootings in the U.S. in 2018
+_Purpose: The interactive map below visualizes the distribution of shootings by location, with the circles weighted by the number of people killed in the shooting._
+`r interactive_map`
+
+_Looking at the map above,_ we see that shootings are **more concentrated in the East than in the Western United States**. In particular, there is a **dense number of shootings in the Northeast**. This doesn't particular mean that there are a high number of shootings in a particular state in this region--on the contrary, the states with the highest number of shootings are outside this region (`r get_correct_grammar(state_most_shootings)`). Additionally, **there are very sparse, if any, shootings in the middle region of the U.S.**, and **there are more concentrated shootings along the East and West coasts**. 
+
+## Plot
+This plot intends to bring insight on _what months of the year had the most shootings in 2018_.
+
+```{r, echo = FALSE}
+months_barplot
+```
+
+<br> 
+As seen _in the bar plot above_, **the most shootings occurred in `r month_most_shootings` (`r month_most_number`), while the least number of shootings occurred in `r month_least_shootings` (`r month_least_number`).** When regarding the overall trend of the graph, **there is an increase in shootings in the warmer months, while in cooler months there is less**. The increase seen in the warmer months is dramatic as well, with the **percent increase of shootings from `r month_least_shootings` to `r month_most_shootings` being `r perc_increase`%**.
+<br><br>
