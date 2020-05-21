@@ -150,17 +150,19 @@ interactive_map <- leaflet(data = dataset) %>%
     lat = ~lat,
     lng = ~long,
     stroke = FALSE,
-    radius = ~num_killed * 30000,
+    radius = ~ num_killed * 30000,
     color = "red",
-    popup = paste("<b>City, State:</b>",
-                  paste0(dataset$state, ", ", dataset$city), "<br>",
-                  "<b>Date:</b>",
-                  dataset$date, "<br>",
-                  "<b>Number of People Injured:</b>",
-                  dataset$num_injured, "<br>",
-                  "<b>Number of People Killed:</b>",
-                  dataset$num_killed)
+    popup = paste(
+      "<b>City, State:</b>",
+      paste0(dataset$state, ", ", dataset$city), "<br>",
+      "<b>Date:</b>",
+      dataset$date, "<br>",
+      "<b>Number of People Injured:</b>",
+      dataset$num_injured, "<br>",
+      "<b>Number of People Killed:</b>",
+      dataset$num_killed
     )
+  )
 
 ## PLOT
 # (1) Create barplot sorting the number of shootings by months of the year
@@ -179,19 +181,27 @@ months_factors_data <- months_data %>%
 
 months_factors_data$month <-
   ordered(months_factors_data$month,
-          levels = c("January", "February", "March",
-                     "April", "May", "June",
-                     "July", "August", "September",
-                     "October", "November", "December"))
+    levels = c(
+      "January", "February", "March",
+      "April", "May", "June",
+      "July", "August", "September",
+      "October", "November", "December"
+    )
+  )
 
-# Create bar plot with months on x-axis and number of shootings on y-axis
-months_barplot <- ggplot(data = months_factors_data, aes(x = month, y = num_shootings))
+# Create plot with months on x-axis and number of shootings on y-axis
+months_barplot <- ggplot(
+  data = months_factors_data,
+  aes(x = month, y = num_shootings)
+  )
 months_barplot <- months_barplot + theme_bw() +
   geom_bar(stat = "identity") +
-  labs(title = "U.S. Shootings by Month in 2018",
-       caption = "Shootings in the U.S. sorted by month.",
-       x = "Month",
-       y = "Number of Shootings")
+  labs(
+    title = "U.S. Shootings by Month in 2018",
+    caption = "Shootings in the U.S. sorted by month.",
+    x = "Month",
+    y = "Number of Shootings"
+  )
 
 # (2) Retrieve values
 # month with least shootings

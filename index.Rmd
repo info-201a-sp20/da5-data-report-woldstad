@@ -18,8 +18,11 @@ source("analysis.R")
 
 ```{r, echo = FALSE}
 kable(agg_table,
-      col.names = c("State", "Number of Shootings",
-                    "Injured", "Killed", "Total Casualties", "% of Casualties Killed")) %>%
+  col.names = c(
+    "State", "Number of Shootings",
+    "Injured", "Killed", "Total Casualties", "% of Casualties Killed"
+  )
+) %>%
   kable_styling(bootstrap_options = "striped", fixed_thead = T) %>%
   scroll_box(width = "100%", height = "400px")
 ```
